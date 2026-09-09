@@ -16,6 +16,7 @@ const submit = async function( event ) {
 
   const response = await fetch( '/submit', {
     method:'POST',
+    headers: { 'Content-Type': 'application/json' },
     body 
   })
 
@@ -45,6 +46,7 @@ const deleteRequest = async function( event, body ) {
   stringy = JSON.stringify(body)
   const response = await fetch('/delete', {
     method: "POST",
+    headers: { 'Content-Type': 'application/json' },
     body: stringy
   })
   const data_array = await response.json()
