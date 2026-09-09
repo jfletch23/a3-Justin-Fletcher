@@ -1,0 +1,54 @@
+body {
+  background:salmon;
+  font-family: Merriweather, sans-serif;
+  font-size: 125%;
+}
+.container {
+  display: flex;
+  align-items: flex-start
+}
+header {
+  text-align:center
+}
+img {
+  max-width:25%
+}
+#main_form {
+  border-style: solid;
+  border-color: gold;
+  padding: 5px;
+  margin: 10px;
+}
+input, select {
+  display: block;
+  margin-bottom: 10px;
+}
+fieldset {
+  border: none;
+  padding: 0px;
+  margin: 0px;
+}
+legend {
+  margin-bottom: 3px;
+}
+.radio_group {
+  display:block
+}
+.radio_group input, .radio_group label {
+  display:inline;
+}
+input[type="number"] {
+  width: 250px;
+  height: 25px;
+}
+.wrapper {
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: max-content;
+}
+.panel {
+  border-style: solid;
+  border-color: gold;
+  margin: 10px;
+  padding: 5px;
+}

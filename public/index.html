@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang='en'>
+  <head>
+    <title>Baseball Prospects Ranking</title>
+    <meta charset='utf-8' >
+    <script src='js/main.js'></script>
+    <link rel='stylesheet' href='css/main.css' >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+    
+    <!-- get rid of favicon error -->
+    <link rel='icon' href='data:;base64,iVBORw0KGgo=' >
+  </head>
+  <body>
+    <header>
+    <img src="MLB_Logo.png" alt="MLB Logo" >
+    <h1>MLB Prospects Database</h1>
+    </header>
+    <div class="container">
+    <form id="main_form">
+      <h2>Fill Out Scouting Report</h2>
+      <label for="player_name">Enter player name</label>
+      <input type="text" id="player_name" name="player_name" value="Kade Anderson" required>
+      <label for="player_birthday">Enter player birthday</label>
+      <input type="date" id="player_birthday" name="player_birthday" required>
+      <label for="player_position">Select player's position</label>
+      <select name="player_position" id="player_position" required>
+        <option value="">Choose a position</option>
+        <option value="Pitcher">Pitcher</option>
+        <option value="Catcher">Catcher</option>
+        <option value="First Base">First Base</option>
+        <option value="Second Base">Second Base</option>
+        <option value="Third Base">Third Base</option>
+        <option value="Shortstop">Shortstop</option>
+        <option value="Left Field">Left Field</option>
+        <option value="Center Field">Center Field</option>
+        <option value="Right Field">Right Field</option>
+      </select>
+      <fieldset>
+        <legend>Enter player's batting handedness</legend>
+        <div class="radio_group">
+          <input type="radio" id="batting_right" name="batting" value="Right" required>
+          <label for="batting_right">Right</label>
+        </div>
+        <div class="radio_group">
+          <input type="radio" id="batting_left" name="batting" value="Left">
+          <label for="batting_left">Left</label>
+        </div>
+        <div class="radio_group">
+          <input type="radio" id="batting_switch" name="batting" value="Switch">
+          <label for="batting_switch">Switch</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Enter player's throwing handedness</legend>
+        <div class="radio_group">
+          <input type="radio" id="throwing_right" name="throwing" value="Right" required>
+          <label for="throwing_right">Right</label>
+        </div>
+        <div class="radio_group">
+          <input type="radio" id="throwing_left" name="throwing" value="Left">
+          <label for="throwing_left">Left</label>
+        </div>
+        <div class="radio_group">
+          <input type="radio" id="throwing_switch" name="throwing" value="Switch">
+          <label for="throwing_switch">Switch</label>
+        </div>
+      </fieldset>
+      <label for="hit_tool">Enter player's hit tool rating</label>
+      <input type="number" id="hit_tool" name="hit_tool" min="20" max="80" step="5" value="50" required>
+      <label for="power_tool">Enter player's power tool rating</label>
+      <input type="number" id="power_tool" name="power_tool" min="20" max="80" step="5" value="50" required>
+      <label for="run_tool">Enter player's run tool rating</label>
+      <input type="number" id="run_tool" name="run_tool" min="20" max="80" step="5" value="50" required>
+      <label for="arm_tool">Enter player's arm tool rating</label>
+      <input type="number" id="arm_tool" name="arm_tool" min="20" max="80" step="5" value="50" required>
+      <label for="field_tool">Enter player's field tool rating</label>
+      <input type="number" id="field_tool" name="field_tool" min="20" max="80" step="5" value="50" required>                      
+      <button>Submit</button>
+    </form>
+    <div class="wrapper"></div>       
+    </div>
+  </body>
+</html>
