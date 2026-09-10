@@ -1,8 +1,33 @@
+require("dotenv").config()
+
 const express = require('express')
 const app = express()
 
+const {MongoClient, ObjectId} = require("mongodb") 
+
 app.use(express.static('public'))
 app.use(express.json())
+
+const uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}`
+
+const client = new MongoClient(uri)
+
+let collection
+
+async function run() {
+  await client.connect()
+  collection = await client.db("BaseballProspectsDatabase").collection("MyCollection")
+
+  app.get("/docs", async (req, res) => {
+    if (collection !== undefined) {
+      const docs = await collection.find({}).toArray()
+      console.log(docs)
+      res.json(docs)
+    }
+  })
+}
+
+run()
 
 const players = [
   { 'player_name': 'Jesus Made', 'player_birthday': "2007-05-08", 'player_age': 19, "player_position" : "Shortstop", "batting" : "S", "throwing": "R", "hit_tool" : 60, "power_tool" : 60, "run_tool" : 60, "arm_tool" : 60, "field_tool" : 55, "overall" : 59},
