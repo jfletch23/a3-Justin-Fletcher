@@ -3,16 +3,27 @@ require("dotenv").config()
 const express = require('express')
 const app = express()
 
-const {MongoClient, ObjectId} = require("mongodb") 
+const {MongoClient, ObjectId} = require("mongodb")
+
+let collection
 
 app.use(express.static('public'))
 app.use(express.json())
 
+const check_connection_middleware = (req, res, next) => {
+  if (collection !== undefined) {
+    next()
+  }
+  else {
+    res.status(503).send()
+  }
+}
+
+app.use(check_connection_middleware)
+
 const uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}`
 
 const client = new MongoClient(uri)
-
-let collection
 
 async function run() {
   await client.connect()
@@ -21,7 +32,6 @@ async function run() {
   app.get("/docs", async (req, res) => {
     if (collection !== undefined) {
       const docs = await collection.find({}).toArray()
-      console.log(docs)
       res.json(docs)
     }
   })
@@ -29,42 +39,40 @@ async function run() {
 
 run()
 
-const players = [
-  { 'player_name': 'Jesus Made', 'player_birthday': "2007-05-08", 'player_age': 19, "player_position" : "Shortstop", "batting" : "S", "throwing": "R", "hit_tool" : 60, "power_tool" : 60, "run_tool" : 60, "arm_tool" : 60, "field_tool" : 55, "overall" : 59},
-  { 'player_name': 'Leo De Vries', 'player_birthday': "2006-10-11", 'player_age': 19, "player_position" : "Third Base", "batting" : "S", "throwing" : "R", "hit_tool" : 60, "power_tool" : 55, "run_tool" : 55, "arm_tool" : 55, "field_tool" : 50, "overall" : 55 },
-  { 'player_name': 'Franklin Arias', 'player_birthday': "2005-11-19", 'player_age': 20, "player_position" : "Shortstop", "batting" : "R", "throwing" : "R", "hit_tool" : 60, "power_tool" : 55, "run_tool" : 45, "arm_tool" : 55, "field_tool" : 60, "overall" : 55 } 
-]
-
-const submit_middleware = ( req, res, next ) => {
+const add_middleware = async (req, res) => {
   const received_data = req.body
   age = getAge(received_data.player_birthday.split("T")[0])
   received_data.player_age = age
   overall = (Number(received_data.hit_tool) + Number(received_data.power_tool) + Number(received_data.run_tool) + +Number(received_data.arm_tool) + Number(received_data.field_tool)) / 5.0
   received_data.overall = Math.round(overall)
-  players.push(received_data)
-  next()
-}
-
-const delete_middleware = ( req, res, next ) => {
-  const player_index = players.findIndex(item => item.player_name === req.body.player_name)
-  if (player_index !== -1) {
-    players.splice(player_index, 1)
+  const result = await collection.insertOne(received_data)
+  if (result.acknowledged !== true) {
+    res.status(504).send()
   }
-  next()
-}
-
-const response_middleware = (req, res) => {
+  else {
     res.writeHead(200, {"Content-Type" : "application/json"})
-    res.end(JSON.stringify(players))
+    res.end(JSON.stringify(result))
+  }
 }
 
-app.post('/submit', submit_middleware )
-app.post('/submit', response_middleware)
+const remove_middleware = async (req, res) => {
+  const result = await collection.deleteOne({
+    _id: new ObjectId(req.body.player_id)
+  })
+  res.writeHead(200, {"Content-Type" : "application/json"})
+  res.end(JSON.stringify(result))
+}
 
-app.post('/delete', delete_middleware)
-app.post('/delete', response_middleware)
+const players_middleware = async (req, res) => {
+  const players = await collection.find({}).toArray()
+  res.writeHead(200, {"Content-Type" : "application/json"})
+  res.end(JSON.stringify(players))
+}
 
-app.get('/players', response_middleware)
+app.get('/players', players_middleware)
+
+app.post('/add', add_middleware)
+app.post('/remove', remove_middleware)
 
 const listener = app.listen( process.env.PORT || 3000 )
 

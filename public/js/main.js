@@ -14,14 +14,13 @@ const submit = async function( event ) {
   
   const body = JSON.stringify(form_JSON)
 
-  const response = await fetch( '/submit', {
+  const add_response = await fetch( '/add', {
     method:'POST',
     headers: { 'Content-Type': 'application/json' },
     body 
   })
 
-  const data_array = await response.json()
-  display_data(data_array)
+  playersRequest()
 
   form.reset()
 }
@@ -43,13 +42,20 @@ window.onload = async function() {
 }
 
 const deleteRequest = async function( event, body ) {
-  stringy = JSON.stringify(body)
   const response = await fetch('/delete', {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
-    body: stringy
+    body: JSON.stringify(boddy)
   })
-  const data_array = await response.json()
+  playersRequest()
+}
+
+const removeRequest = async function(event, body) {
+  const response = await fetch('remove', {
+    method: "POST",
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body) 
+  })
   playersRequest()
 }
 
@@ -82,7 +88,7 @@ const display_data = function(data) {
     delete_button = document.createElement("button")
     delete_button.innerText = "Delete Player"
     delete_button.addEventListener('click', function(event) {
-      deleteRequest(event, {"player_name" : item.player_name})
+      removeRequest(event, {"player_id" : item._id})
     })
     panel.appendChild(delete_button) 
   }
