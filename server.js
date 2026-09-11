@@ -52,8 +52,13 @@ const remove_middleware = async (req, res) => {
   const result = await collection.deleteOne({
     _id: new ObjectId(req.body.player_id)
   })
-  res.writeHead(200, {"Content-Type" : "application/json"})
-  res.end(JSON.stringify(result))
+  if (result.acknowledged !== true) {
+    res.status(504).send()
+  }
+  else {
+    res.writeHead(200, {"Content-Type" : "application/json"})
+    res.end(JSON.stringify(result))
+  }  
 }
 
 const players_middleware = async (req, res) => {
