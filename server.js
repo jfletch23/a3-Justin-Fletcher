@@ -28,13 +28,6 @@ const client = new MongoClient(uri)
 async function run() {
   await client.connect()
   collection = await client.db("BaseballProspectsDatabase").collection("MyCollection")
-
-  app.get("/docs", async (req, res) => {
-    if (collection !== undefined) {
-      const docs = await collection.find({}).toArray()
-      res.json(docs)
-    }
-  })
 }
 
 run()

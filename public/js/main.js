@@ -41,15 +41,6 @@ window.onload = async function() {
   playersRequest()
 }
 
-const deleteRequest = async function( event, body ) {
-  const response = await fetch('/delete', {
-    method: "POST",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(boddy)
-  })
-  playersRequest()
-}
-
 const removeRequest = async function(event, body) {
   const response = await fetch('remove', {
     method: "POST",
