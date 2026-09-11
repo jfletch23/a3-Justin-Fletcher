@@ -70,10 +70,33 @@ const players_middleware = async (req, res) => {
   res.end(JSON.stringify(players))
 }
 
+const update_middleware = async (req, res) => {
+  const received_data = req.body
+  const filter = {_id : new ObjectId(received_data._id)}
+  const {_id, ...data_without_id} = received_data
+  const updateData = {
+    $set: data_without_id
+  }
+  console.log(updateData)
+  const result = await collection.updateOne(filter, updateData)
+  if (result.acknowledged !== true) {
+    res.status(504).send()
+  } 
+  else if (result.modifiedCount !== 1) {
+    res.status(505).send()
+  }
+  else {
+    res.writeHead(200, {"Content-Type" : "application/json"})
+    res.end(JSON.stringify(result))
+  }
+}
+
 app.get('/players', players_middleware)
 
 app.post('/add', add_middleware)
 app.delete('/delete/:objectId', delete_middleware)
+
+app.patch('/update', update_middleware)
 
 const listener = app.listen( process.env.PORT || 3000 )
 
