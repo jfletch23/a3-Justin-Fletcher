@@ -41,11 +41,9 @@ window.onload = async function() {
   playersRequest()
 }
 
-const removeRequest = async function(event, body) {
-  const response = await fetch('remove', {
-    method: "POST",
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(body) 
+const deleteRequest = async function(event, body) {
+  const response = await fetch(`/delete/${body.player_id}`, {
+    method: "DELETE",
   })
   playersRequest()
 }
@@ -79,7 +77,7 @@ const display_data = function(data) {
     delete_button = document.createElement("button")
     delete_button.innerText = "Delete Player"
     delete_button.addEventListener('click', function(event) {
-      removeRequest(event, {"player_id" : item._id})
+      deleteRequest(event, {"player_id" : item._id})
     })
     panel.appendChild(delete_button) 
   }

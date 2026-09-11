@@ -48,12 +48,15 @@ const add_middleware = async (req, res) => {
   }
 }
 
-const remove_middleware = async (req, res) => {
+const delete_middleware = async (req, res) => {
   const result = await collection.deleteOne({
-    _id: new ObjectId(req.body.player_id)
+    _id: new ObjectId(req.params.objectId)
   })
   if (result.acknowledged !== true) {
     res.status(504).send()
+  }
+  else if (result.deletedCount !== 1) {
+    res.status(505).send()
   }
   else {
     res.writeHead(200, {"Content-Type" : "application/json"})
@@ -70,7 +73,7 @@ const players_middleware = async (req, res) => {
 app.get('/players', players_middleware)
 
 app.post('/add', add_middleware)
-app.post('/remove', remove_middleware)
+app.delete('/delete/:objectId', delete_middleware)
 
 const listener = app.listen( process.env.PORT || 3000 )
 
