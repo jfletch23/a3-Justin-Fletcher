@@ -35,8 +35,7 @@ const playersRequest = async function() {
 
 window.onload = async function() {
   const form = document.querySelector("form")
-  //Doing add event listener so required attribute functions and my form cannot be submitted with null or undefined values
-  form.addEventListener('submit', submit)
+  form.onsubmit = submit
   wrapper = document.getElementsByClassName("wrapper")[0]
   playersRequest()
 }
@@ -44,6 +43,15 @@ window.onload = async function() {
 const deleteRequest = async function(event, body) {
   const response = await fetch(`/delete/${body.player_id}`, {
     method: "DELETE",
+  })
+  playersRequest()
+}
+
+const updateRequest = async function(event, body) {
+  const response = await fetch('/update', {
+    method: "PUT",
+    headers: {"Content-Type" : "application/json"},
+    body: JSON.stringify(body)
   })
   playersRequest()
 }
@@ -79,6 +87,50 @@ const display_data = function(data) {
     delete_button.addEventListener('click', function(event) {
       deleteRequest(event, {"player_id" : item._id})
     })
-    panel.appendChild(delete_button) 
+    panel.appendChild(delete_button)
+    
+    update_button = document.createElement("button")
+    update_button.innerText = "Update Player"
+    update_button.addEventListener("click", function(event) {
+      const form = document.querySelector("form")
+      Object.keys(item).forEach(key => {
+        const field = form.elements[key];      
+        if (field) {
+          field.value = item[key]
+        }
+      })
+
+      const submit_button = document.querySelector("#submit")
+      submit_button.innerText = "Update"
+
+      find_cancel_button = document.querySelector("#cancel")
+      if (!find_cancel_button) {
+          cancel_button = document.createElement("button")
+          cancel_button.id = "cancel"
+          cancel_button.innerText = "Cancel"
+          cancel_button.addEventListener("click", function(event) {
+            form.reset()
+            cancel_button.remove()
+            submit_button.innerText = "Submit"
+
+          })
+          form.appendChild(cancel_button)
+      }
+
+      form.onsubmit = function (event) {
+        event.preventDefault()
+        const form_data = new FormData(form)
+        const form_JSON = Object.fromEntries(form_data.entries())
+        form_JSON._id = item._id
+        updateRequest(event, form_JSON)
+        form.reset()
+        cancel_button.remove()
+        submit_button.innerText = "Submit"
+        form.onsubmit = submit
+      }
+
+    })
+    panel.appendChild(update_button)
+    
   }
 }

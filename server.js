@@ -77,7 +77,6 @@ const update_middleware = async (req, res) => {
   const updateData = {
     $set: data_without_id
   }
-  console.log(updateData)
   const result = await collection.updateOne(filter, updateData)
   if (result.acknowledged !== true) {
     res.status(504).send()
@@ -96,7 +95,7 @@ app.get('/players', players_middleware)
 app.post('/add', add_middleware)
 app.delete('/delete/:objectId', delete_middleware)
 
-app.patch('/update', update_middleware)
+app.put('/update', update_middleware)
 
 const listener = app.listen( process.env.PORT || 3000 )
 
