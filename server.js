@@ -5,13 +5,14 @@ const app = express()
 
 const {MongoClient, ObjectId} = require("mongodb")
 
-let collection
+let players_collection
+let users_collection
 
 app.use(express.static('public'))
 app.use(express.json())
 
 const check_connection_middleware = (req, res, next) => {
-  if (collection !== undefined) {
+  if (players_collection !== undefined && users_collection !== undefined) {
     next()
   }
   else {
@@ -27,7 +28,8 @@ const client = new MongoClient(uri)
 
 async function run() {
   await client.connect()
-  collection = await client.db("BaseballProspectsDatabase").collection("MyCollection")
+  players_collection = await client.db("BaseballProspectsDatabase").collection("Players")
+  users_collection = await client.db("BaseballProspectsDatabase").collection("Users")
 }
 
 run()
@@ -38,7 +40,7 @@ const add_middleware = async (req, res) => {
   received_data.player_age = age
   overall = (Number(received_data.hit_tool) + Number(received_data.power_tool) + Number(received_data.run_tool) + +Number(received_data.arm_tool) + Number(received_data.field_tool)) / 5.0
   received_data.overall = Math.round(overall)
-  const result = await collection.insertOne(received_data)
+  const result = await players_collection.insertOne(received_data)
   if (result.acknowledged !== true) {
     res.status(504).send()
   }
@@ -49,7 +51,7 @@ const add_middleware = async (req, res) => {
 }
 
 const delete_middleware = async (req, res) => {
-  const result = await collection.deleteOne({
+  const result = await players_collection.deleteOne({
     _id: new ObjectId(req.params.objectId)
   })
   if (result.acknowledged !== true) {
@@ -65,7 +67,7 @@ const delete_middleware = async (req, res) => {
 }
 
 const players_middleware = async (req, res) => {
-  const players = await collection.find({}).toArray()
+  const players = await players_collection.find({}).toArray()
   res.writeHead(200, {"Content-Type" : "application/json"})
   res.end(JSON.stringify(players))
 }
@@ -77,7 +79,7 @@ const update_middleware = async (req, res) => {
   const updateData = {
     $set: data_without_id
   }
-  const result = await collection.updateOne(filter, updateData)
+  const result = await players_collection.updateOne(filter, updateData)
   if (result.acknowledged !== true) {
     res.status(504).send()
   } 
