@@ -25,18 +25,45 @@ const submit = async function( event ) {
   form.reset()
 }
 
+const logout = async function(event) {
+  const response = await fetch('/logout', {
+    method: "GET"
+  })
+  console.log(response)
+  if (response.status === 302) {
+    console.log("Redirecting because user logged out")
+    window.location.href = "/"
+  }
+}
+
 const playersRequest = async function() {
   const response = await fetch("/players", {
     method: "GET"
   })
-  const player_data = await response.json()
-  display_data(player_data)
+  if (response.status === 302) {
+    window.location.href = "/"
+  }
+  else {
+    const player_data = await response.json()
+    display_data(player_data)
+  }
+
 }
 
 window.onload = async function() {
   const form = document.querySelector("form")
   form.onsubmit = submit
+  const logout_button = document.querySelector("#logout")
+  logout_button.onclick = logout
   wrapper = document.getElementsByClassName("wrapper")[0]
+  display_username = document.createElement("p")
+  const username = await fetch('/username', {
+    method: "GET"
+  })
+  const username_json = await username.json()
+  console.log(username_json)
+  display_username.innerText = username_json.username
+  document.body.appendChild(display_username)
   playersRequest()
 }
 

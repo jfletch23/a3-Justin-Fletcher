@@ -1,6 +1,7 @@
 require("dotenv").config()
 
 const express = require('express')
+const cookie = require('cookie-session')
 const app = express()
 
 const {MongoClient, ObjectId} = require("mongodb")
@@ -10,6 +11,7 @@ let users_collection
 
 app.use(express.static('public'))
 app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
 const check_connection_middleware = (req, res, next) => {
   if (players_collection !== undefined && users_collection !== undefined) {
@@ -21,6 +23,30 @@ const check_connection_middleware = (req, res, next) => {
 }
 
 app.use(check_connection_middleware)
+
+app.use(cookie({
+  name: 'session',
+  keys: [process.env.COOKIE_KEY_ONE, process.env.COOKIE_KEY_TWO]
+}))
+
+const default_value_cookie_middleware = (req, res, next) => {
+  if (req.session.login === undefined) {
+    req.session.login = false
+  }
+  next()
+}
+
+app.use(default_value_cookie_middleware)
+
+const authentication_middleware = (req, res, next) => {
+  if (req.session.login === true) {
+    next()
+  }
+  else {
+    //Redirecting on the server did not work so just going to redirect on the client and I'm letting the client know to redirect to index.html by sending a 302 status code
+    res.status(302).send()
+  }
+}
 
 const uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}`
 
@@ -40,6 +66,7 @@ const add_middleware = async (req, res) => {
   received_data.player_age = age
   overall = (Number(received_data.hit_tool) + Number(received_data.power_tool) + Number(received_data.run_tool) + +Number(received_data.arm_tool) + Number(received_data.field_tool)) / 5.0
   received_data.overall = Math.round(overall)
+  received_data.uuid = req.session.uuid
   const result = await players_collection.insertOne(received_data)
   if (result.acknowledged !== true) {
     res.status(504).send()
@@ -67,7 +94,7 @@ const delete_middleware = async (req, res) => {
 }
 
 const players_middleware = async (req, res) => {
-  const players = await players_collection.find({}).toArray()
+  const players = await players_collection.find({"uuid" : req.session.uuid}).toArray()
   res.writeHead(200, {"Content-Type" : "application/json"})
   res.end(JSON.stringify(players))
 }
@@ -92,9 +119,76 @@ const update_middleware = async (req, res) => {
   }
 }
 
+const get_username_middleware = async (req, res) => {
+  const user = await users_collection.findOne({"_id" : new ObjectId(req.session.uuid)})
+  console.log(user)
+  console.log(JSON.stringify(user))
+  res.writeHead(200, {"Content-Type" : "application/json"})
+  res.end(JSON.stringify(user))
+}
+
+const create_user_middleware = async (req, res) => {
+  const received_data = req.body
+  const result = await users_collection.insertOne(received_data)
+  if (result.acknowledged !== true) {
+    res.status(504).send()
+  }
+  else {
+    req.session.login = true
+    req.session.uuid = result.insertedId
+    res.redirect("/main.html")
+    //res.writeHead(200, {"Content-Type" : "application/json"})
+    //res.end(JSON.stringify(result))
+  }  
+}
+
+const login_middleware = async (req, res) => {
+  const received_data = req.body
+  username = received_data.username
+  password = received_data.password
+  const users = await users_collection.find({}).toArray()
+  let foundUser = false
+  for (const user of users) {
+    if (user.username === username) {
+      console.log("Account exists!")
+      foundUser = true
+      if (user.password === password) {
+        console.log("Access granted!")
+        req.session.login = true
+        req.session.uuid = user._id
+        return res.redirect("/main.html")
+      }
+      else {
+        console.log("Access denied, incorrect password!")
+        return res.redirect("/incorrect.html")
+      }
+      break
+    }
+  }
+  if (!foundUser) {
+    console.log("Account does not exist")
+    return res.redirect("/noaccount.html")
+  }
+}
+
+const logout_middleware = async (req, res) => {
+  if (req.session.login === true) {
+    req.session.login = false
+    res.status(302).send()
+  }
+}
+
+app.post('/createuser', create_user_middleware)
+app.post('/login', login_middleware)
+
+app.use(authentication_middleware)
+
 app.get('/players', players_middleware)
+app.get('/username', get_username_middleware)
+app.get('/logout', logout_middleware)
 
 app.post('/add', add_middleware)
+
 app.delete('/delete/:objectId', delete_middleware)
 
 app.put('/update', update_middleware)
