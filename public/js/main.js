@@ -60,10 +60,21 @@ window.onload = async function() {
   const username = await fetch('/username', {
     method: "GET"
   })
+  //If response is status code 302 that means authentication middleware has triggered and user is not logged in so redirect to log in page
+  if (username.status === 302) {
+    window.location.href = "/"
+  }
   const username_json = await username.json()
   console.log(username_json)
   display_username.innerText = username_json.username
-  document.body.appendChild(display_username)
+  display_username.id = "username_text"
+  const username_parent = document.querySelector("#user_parent")
+  username_parent.insertBefore(display_username, username_parent.children[0])
+  const dropdown_menu = document.querySelector(".dropdown-trigger")
+  const instances = M.Dropdown.init(dropdown_menu, {
+    coverTrigger: false,
+    alignment: 'right'
+  })
   playersRequest()
 }
 

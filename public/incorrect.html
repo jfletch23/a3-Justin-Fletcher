@@ -1,11 +1,27 @@
 <!doctype html>
 <html lang='en'>
     <head>
-        <title>Incorrect Login</title>
+        <title>Incorrect Password</title>
         <meta charset='utf-8' >
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="css/noaccount.css">
     </head>
     <body>
-        <p>You entered the incorrect password!</p>
-        <button onclick="window.location.href='/'">Click me to return to login page</button>
+        <nav>
+            <div class="nav-wrapper teal accent-3">
+                <a href="/" class="brand-logo left flex-logo">
+                    <img src="baseball.png" alt="baseball logo">
+                    <span class="yellow-text lighten-3">Baseball Prospects Database</span>
+                </a>
+            </div>
+        </nav>
+        <h1 class="header center red-text">Incorrect password</h1>
+        <div class="center-align">
+            <button class="btn waves-effect waves-light" onclick="window.location.href='/'">Return home</button>
+        </div>
     </body>
 </html>

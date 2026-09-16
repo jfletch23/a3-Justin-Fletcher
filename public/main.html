@@ -3,7 +3,10 @@
   <head>
     <title>Baseball Prospects Ranking</title>
     <meta charset='utf-8' >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src='js/main.js'></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel='stylesheet' href='css/main.css' >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,11 +16,33 @@
     <link rel='icon' href='data:;base64,iVBORw0KGgo=' >
   </head>
   <body>
+    <nav>
+      <div class="nav-wrapper teal accent-3">
+          <a href="/" class="brand-logo left flex-logo">
+              <img src="baseball.png" alt="baseball logo">
+              <span class="yellow-text lighten-3">Baseball Prospects Database</span>
+          </a>
+          <div class="right">
+            <div class="valign-wrapper" id="user_parent">
+              <a class="dropdown-trigger" href="#" data-target="icon-dropdown">
+                <i class="material-icons">account_circle</i>
+              </a>
+            </div>
+          </div>
+      </div>
+    </nav>
+    <ul id="icon-dropdown" class="dropdown-content">
+      <li>
+        <button id="logout">
+          <i class="material-icons">exit_to_app</i>
+          Logout
+        </button>
+      </li>
+    </ul>
     <header>
     <img src="MLB_Logo.png" alt="MLB Logo" >
     <div>
       <h1> MLB Propsects Database</h1>
-      <button id="logout">Logout</button>
     </div>
     </header>
     <div class="container">

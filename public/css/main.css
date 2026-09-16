@@ -1,7 +1,29 @@
 body {
-  background:salmon;
+  background:lightpink;
   font-family: Merriweather, sans-serif;
   font-size: 125%;
+}
+.nav-wrapper .brand-logo img {
+    height: 56px;
+    vertical-align: top;
+    padding-left: 5px;
+    padding-right: 3px;
+}
+.nav-wrapper .brand-logo img:hover, .nav-wrapper .brand-logo span:hover  {
+    opacity: 0.6;
+}
+.nav-wrapper i {
+  font-size: 64px !important;
+  padding-right: 16px;
+}
+.nav-wrapper i:hover {
+  opacity: 0.6;
+}
+.nav-wrapper .valign-wrapper {
+  height: 64px;
+}
+.nav-wrapper #username_text {
+  padding: 16px;
 }
 .container {
   display: flex;
