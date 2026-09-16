@@ -53,6 +53,8 @@ const playersRequest = async function() {
 window.onload = async function() {
   const form = document.querySelector("form")
   form.onsubmit = submit
+  //const name_field_label = form.querySelector(".input-field").querySelector("label")
+  //name_field_label.class = "active"
   const logout_button = document.querySelector("#logout")
   logout_button.onclick = logout
   wrapper = document.getElementsByClassName("wrapper")[0]
@@ -75,6 +77,8 @@ window.onload = async function() {
     coverTrigger: false,
     alignment: 'right'
   })
+  const select = document.querySelectorAll("select")
+  const instances_two = M.FormSelect.init(select, {dropdownOptions: {coverTrigger: false}})
   playersRequest()
 }
 
@@ -131,10 +135,21 @@ const display_data = function(data) {
     update_button.innerText = "Update Player"
     update_button.addEventListener("click", function(event) {
       const form = document.querySelector("form")
+      //Gets first input-field class which is the class I want (the first field in the HTML DOM tree)
+      const text_input_field = form.querySelector(".input-field").querySelector("input")
+      console.log(text_input_field)
       Object.keys(item).forEach(key => {
-        const field = form.elements[key];      
+        const field = form.elements[key];   
         if (field) {
+          console.log(field)
           field.value = item[key]
+          if (field instanceof HTMLSelectElement) {
+            const select = document.querySelectorAll("select")
+            const instances = M.FormSelect.init(select, {dropdownOptions: {coverTrigger: false}})
+          }
+          if (field === text_input_field) {
+            M.updateTextFields()
+          }
         }
       })
 

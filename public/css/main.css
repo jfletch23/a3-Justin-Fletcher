@@ -25,39 +25,52 @@ body {
 .nav-wrapper #username_text {
   padding: 16px;
 }
-.container {
+.my-container {
   display: flex;
   align-items: flex-start
 }
 header {
   text-align:center
 }
-img {
-  max-width:25%
-}
 #main_form {
   border-style: solid;
-  border-color: gold;
+  border-color: lightgreen;
   padding: 5px;
   margin: 10px;
 }
-input, select {
+h2 {
+  font-size: 32px;
+}
+.input-field {
+  margin-top: 24px;
+}
+.input-field > label {
+  font-size: 1.2rem !important;
+  color: black
+}
+.input-field > label.active {
+  font-size: 1.7rem !important;
+  color: black !important;
+}
+input {
   display: block;
   margin-bottom: 10px;
 }
 fieldset {
   border: none;
   padding: 0px;
-  margin: 0px;
+  margin-bottom: 16px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 legend {
   margin-bottom: 3px;
 }
-.radio_group {
+.display-block {
   display:block
 }
-.radio_group input, .radio_group label {
-  display:inline;
+.display-block > span {
+  color: black;
 }
 input[type="number"] {
   width: 250px;
@@ -70,7 +83,7 @@ input[type="number"] {
 }
 .panel {
   border-style: solid;
-  border-color: gold;
+  border-color: lightgreen;
   margin: 10px;
   padding: 5px;
 }
