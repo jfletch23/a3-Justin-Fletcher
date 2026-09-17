@@ -2,7 +2,7 @@
 <html lang='en'>
     <head>
         <title>Login</title>
-        <meta charset='utf-8' >
+        <meta name="Baseball Prospects Database Login Page" charset='utf-8' >
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
@@ -11,28 +11,33 @@
         <link rel="stylesheet" href="css/noaccount.css">
     </head>
     <body>
-        <nav>
+        <nav role="navigation">
             <div class="nav-wrapper teal accent-3">
                 <a href="/" class="brand-logo left flex-logo">
                     <img src="baseball.png" alt="baseball logo">
-                    <span class="yellow-text lighten-3">Baseball Prospects Database</span>
+                    <span class="blue-text text-darken-4">Baseball Prospects Database</span>
                 </a>
             </div>
         </nav>
-        <h1 class="header center red-text">Welcome!</h1>
-        <p>Please login to continue</p>
-        <form action="/login" method="POST">
-            <div class="input-field">
-                <input type="text" name="username" placeholder="">
-                <label for="username" class="active black-text">Username</label>
-            </div>
-            <div class="input-field">
-                <input type="password" name="password" >
-                <label for="password" class="active black-text">Password</label>
-            </div>
-            <button class="btn waves-effect waves-light" type="submit">Submit
-                <i class="material-icons right">send</i>
-            </button>
-        </form>
+        <main role="main">
+            <h1 class="header center">Welcome!</h1>
+            <p>Please login to continue</p>
+            <form action="/login" method="POST">
+                <div class="input-field">
+                    <input type="text" name="username" id="username" placeholder="">
+                    <label for="username" class="active black-text">Username</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" name="password" id="password" >
+                    <label for="password" class="active black-text">Password</label>
+                </div>
+                <button class="btn waves-effect waves-light blue-text text-darken-4 teal accent-3" type="submit">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
+        </main>
+        <footer class="teal accent-3">
+            <small>CS 4241 Webware - Assignment 3 by Justin Fletcher</small>
+        </footer>
     </body>
 </html>

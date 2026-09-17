@@ -1,5 +1,12 @@
 body {
     background-color: lightpink;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
 }
 
 p {
@@ -36,4 +43,8 @@ form {
 
 form > button {
     margin-bottom: 10px !important;
+}
+
+footer {
+    text-align: center;
 }
