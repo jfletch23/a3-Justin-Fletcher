@@ -3,6 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-display: optional;
 }
 
 main {
@@ -10,9 +11,7 @@ main {
 }
 
 p {
-    font-family: Merriweather, sans-serif;
     font-size: 24px;
-    font-display: optional;
     padding-left: 5px;
 }
 

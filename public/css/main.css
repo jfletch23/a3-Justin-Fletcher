@@ -1,6 +1,6 @@
 body {
   background:lightpink;
-  font-family: Merriweather, sans-serif;
+  font-display: optional;
   font-size: 125%;
 }
 .nav-wrapper .brand-logo img {
