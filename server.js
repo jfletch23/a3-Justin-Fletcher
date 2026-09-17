@@ -121,8 +121,6 @@ const update_middleware = async (req, res) => {
 
 const get_username_middleware = async (req, res) => {
   const user = await users_collection.findOne({"_id" : new ObjectId(req.session.uuid)})
-  console.log(user)
-  console.log(JSON.stringify(user))
   res.writeHead(200, {"Content-Type" : "application/json"})
   res.end(JSON.stringify(user))
 }
@@ -137,8 +135,6 @@ const create_user_middleware = async (req, res) => {
     req.session.login = true
     req.session.uuid = result.insertedId
     res.redirect("/main.html")
-    //res.writeHead(200, {"Content-Type" : "application/json"})
-    //res.end(JSON.stringify(result))
   }  
 }
 
@@ -150,23 +146,23 @@ const login_middleware = async (req, res) => {
   let foundUser = false
   for (const user of users) {
     if (user.username === username) {
-      console.log("Account exists!")
+      //Need to use foundUser boolean since I have multiple users I am iterating through, can't just make it an else block since it would trigger incorrectly
       foundUser = true
       if (user.password === password) {
-        console.log("Access granted!")
+        //Access granted
         req.session.login = true
         req.session.uuid = user._id
         return res.redirect("/main.html")
       }
       else {
-        console.log("Access denied, incorrect password!")
+        //Incorect password, but account exists
         return res.redirect("/incorrect.html")
       }
       break
     }
   }
   if (!foundUser) {
-    console.log("Account does not exist")
+    //Account does not exist
     return res.redirect("/noaccount.html")
   }
 }
@@ -174,6 +170,7 @@ const login_middleware = async (req, res) => {
 const logout_middleware = async (req, res) => {
   if (req.session.login === true) {
     req.session.login = false
+    //Send 302 status to let client know to redirect user
     res.status(302).send()
   }
 }
@@ -181,6 +178,7 @@ const logout_middleware = async (req, res) => {
 app.post('/createuser', create_user_middleware)
 app.post('/login', login_middleware)
 
+//I think it is important to have my authentication middleware after the log in related POST requests so it is possible to login
 app.use(authentication_middleware)
 
 app.get('/players', players_middleware)
@@ -209,4 +207,3 @@ function getAge(dateString) {
     }
     return age;
 }
-
