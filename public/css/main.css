@@ -87,3 +87,7 @@ input[type="number"] {
   margin: 10px;
   padding: 5px;
 }
+.panel button {
+  display: block;
+  margin-bottom: 16px;
+}

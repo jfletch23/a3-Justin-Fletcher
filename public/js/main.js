@@ -53,8 +53,6 @@ const playersRequest = async function() {
 window.onload = async function() {
   const form = document.querySelector("form")
   form.onsubmit = submit
-  //const name_field_label = form.querySelector(".input-field").querySelector("label")
-  //name_field_label.class = "active"
   const logout_button = document.querySelector("#logout")
   logout_button.onclick = logout
   wrapper = document.getElementsByClassName("wrapper")[0]
@@ -126,6 +124,11 @@ const display_data = function(data) {
     ul.appendChild(li_overall)
     delete_button = document.createElement("button")
     delete_button.innerText = "Delete Player"
+    delete_button.className = "btn waves-effect waves-light"
+    const trash_icon = document.createElement("i")
+    trash_icon.innerText = "delete"
+    trash_icon.className = "material-icons left"
+    delete_button.appendChild(trash_icon)
     delete_button.addEventListener('click', function(event) {
       deleteRequest(event, {"player_id" : item._id})
     })
@@ -133,6 +136,11 @@ const display_data = function(data) {
     
     update_button = document.createElement("button")
     update_button.innerText = "Update Player"
+    update_button.className = "btn waves-effect waves-light"
+    const update_icon = document.createElement("i")
+    update_icon.innerText = "update"
+    update_icon.className = "material-icons left"
+    update_button.appendChild(update_icon)
     update_button.addEventListener("click", function(event) {
       const form = document.querySelector("form")
       //Gets first input-field class which is the class I want (the first field in the HTML DOM tree)
