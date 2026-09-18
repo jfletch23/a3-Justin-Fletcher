@@ -135,8 +135,25 @@ const players_middleware = async (req, res) => {
 
 const update_middleware = async (req, res) => {
   const received_data = req.body
-  const filter = {_id : new ObjectId(received_data._id)}
+  const my_id = new ObjectId(received_data._id)
+  const filter = {_id : my_id}
   const {_id, ...data_without_id} = received_data
+  const specific_player = await players_collection.find({"_id" : my_id}).toArray()
+  const {_id: player_id, player_age, overall, uuid, ...my_player} = specific_player[0]
+  const changedKeys = Object.keys(my_player).filter(key => my_player[key] !== data_without_id[key])
+  const tools_list = ["hit_tool", "power_tool", "run_tool", "arm_tool", "field_tool"]
+  for (item of changedKeys) {
+    if (item === "player_birthday") {
+      age = getAge(data_without_id.player_birthday.split("T")[0])
+      data_without_id.player_age = age
+    }
+
+    if (tools_list.includes(item)) {
+      const overall = (Number(data_without_id.hit_tool) + Number(data_without_id.power_tool) + Number(data_without_id.run_tool) + +Number(data_without_id.arm_tool) + Number(data_without_id.field_tool)) / 5.0
+      data_without_id.overall = Math.round(overall)
+      break
+    }
+  }
   const updateData = {
     $set: data_without_id
   }
