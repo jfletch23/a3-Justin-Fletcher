@@ -193,6 +193,7 @@ const display_data = function(data) {
         form_JSON._id = item._id
         updateRequest(event, form_JSON)
         form.reset()
+        M.updateTextFields()
         cancel_button.remove()
         submit_button.innerText = "Submit"
         form.onsubmit = submit
