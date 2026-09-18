@@ -11,11 +11,9 @@ I faced many challenges in making this application and spent quite a long time o
 I chose a simple authentication strategy of saving my usernames and passwords as plain JSON in my MongoDB database. I made a collection for users separate from my collection of data and tied each data instance in the data collection to a user id. The user id came from MongoDB's automatic assignment of an ID to every new object created. While not very secure, I chose this strategy because it was attainable. Having said that, I think I did a good job since the system does handle incorrect passwords for existing users and non-existing users. The only flaw in the system is if the user types in a non-existent username they get redirected to a create account page at which point they could type in an existing username and there would now be duplicate users in the database. A future improvement could be checking for that obscure edge case and displaying a message along the lines of user already exists. 
 
 My currently created user account are:
-username: admin 
-password: admin
+> **username:** admin **password:** admin
 
-username: user1
-password: password123
+> **username:** user1 **password:** password123
 
 Both accounts have different data saved with them. If you create a new account it will have no data associated with it.
 
