@@ -30,9 +30,7 @@ const logout = async function(event) {
   const response = await fetch('/logout', {
     method: "GET"
   })
-  console.log(response)
   if (response.status === 302) {
-    console.log("Redirecting because user logged out")
     window.location.href = "/"
   }
 }
@@ -153,11 +151,9 @@ const display_data = function(data) {
       const form = document.querySelector("form")
       //Gets first input-field class which is the class I want (the first field in the HTML DOM tree)
       const text_input_field = form.querySelector(".input-field").querySelector("input")
-      console.log(text_input_field)
       Object.keys(item).forEach(key => {
         const field = form.elements[key];   
         if (field) {
-          console.log(field)
           field.value = item[key]
           if (field instanceof HTMLSelectElement) {
             const select = document.querySelectorAll("select")
