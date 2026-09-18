@@ -1,100 +1,8 @@
 Assignment 3 - Persistence: Two-tier Web Application with Database, Express server, and CSS template
 ===
+## Baseball Prospects Database
 
-Due: September 15th, by 1:59 PM.
-
-This assignment continues where we left off in A2, extending it to use a popular Node.js server framework (express), a database (mongodb), and a CSS application framework / template of your choice (Bootstrap, Material Design, Semantic UI, Pure etc.)
-
-Baseline Requirements
----
-
-Your application is required to implement the following functionalities:
-
-- a `Server`, created using Express (no alternatives will be accepted for this assignment)
-- a `Results` functionality which shows all data associated with a logged in user (except passwords)
-- a `Form/Entry` functionality which allows users to add, modify, and delete data items (must be all three!) associated with their user name / account. 
-- Persistent data storage in between server sessions using [mongodb](https://www.mongodb.com/cloud/atlas) (you *must* use mongodb for this assignment). You can use either the [official mongodb node.js library](https://www.npmjs.com/package/mongodb) or use the [Mongoose library](https://www.npmjs.com/package/mongoose), which enables you to define formal schemas for your database. Please be aware that the course staff cannot provide in-depth support for use of Mongoose.  
-- Use of a [CSS framework or template](https://github.com/troxler/awesome-css-frameworks). 
-This should do the bulk of your styling/CSS for you and be appropriate to your application. 
-For example, don't use [NES.css](https://nostalgic-css.github.io/NES.css/) (which is awesome!) unless you're creating a game or some type of retro 80s site.
-
-Your application is required to demonstrate the use of the following concepts:  
-
-HTML:  
-- HTML input tags and form fields of various flavors (`<textarea>`, `<input>`, checkboxes, radio buttons etc.)
-- HTML that can display all data *for a particular authenticated user*. Note that this is different from the last assignnment, which required the display of all data in memory on the server.
-
-Note that it might make sense to have two pages for this assignment, one that handles login / authentication, and one that contains the rest of your application.
-For example, when visiting the home page for the assignment, users could be presented with a login form. After submitting the login form, if the login is 
-successful, they are taken to the main application. If they fail, they are sent back to the login to try again. For this assignment, it is acceptable to simply create 
-new user accounts upon login if none exist, however, you must alert your users to this fact.  
-
-CSS:  
-- CSS styling should primarily be provided by your chosen template/framework. 
-Oftentimes a great deal of care has been put into designing CSS templates; 
-don't override their stylesheets unless you are extremely confident in your graphic design capabilities. 
-The idea is to use CSS templates that give you a professional looking design aesthetic without requiring you to be a graphic designer yourself.
-
-JavaScript:  
-- At minimum, a small amount of front-end JavaScript to get / fetch data from the server. 
-See the [previous assignment](https://github.com/cs-4241-23/shortstack) for reference.
-
-Node.js:  
-- A server using Express and a persistent database (mongodb).
-
-General:  
-- Your site should achieve at least 90% on the `Performance`, `Best Practices`, `Accessibility`, and `SEO` tests 
-using Google [Lighthouse](https://developers.google.com/web/tools/lighthouse) (don't worry about the PWA test, and don't worry about scores for mobile devices).
-Test early and often so that fixing problems doesn't lead to suffering at the end of the assignment. 
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements. I'd begin by converting your A2 assignment. First, change the server to use express. Then, modify the server to use mongodb instead of storing data locally. Last but not least, implement user accounts and login. User accounts and login is often the hardest part of this assignment, so budget your time accordingly.
-2. Deploy your project to Render and fill in the appropriate fields in your package.json file.
-3. Test your project to make sure that when someone goes to your main page on Render, it displays correctly.
-4. Ensure that your project has the proper naming scheme `a3-yourfirstname-yourlastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a3-firstname-lastname`.
-
-Achievements
----
-
-Below are suggested technical and design achievements. You can use these to help boost your grade up to an A and customize the 
-assignment to your personal interests, for a maximum twenty additional points and a maximum grade of a 100%. 
-These are recommended achievements, but feel free to create/implement your own... just make sure you thoroughly describe what you did in your README, 
-why it was challenging, and how many points you think the achievement should be worth. 
-ALL ACHIEVEMENTS MUST BE DESCRIBED IN YOUR README IN ORDER TO GET CREDIT FOR THEM.
-
-*Technical*
-- (10 points) Implement OAuth authentication, perhaps with a library like [passport.js](http://www.passportjs.org/). 
-*You must either use Github authenticaion or provide a username/password to access a dummy account*. 
-Course staff cannot be expected, for example, to have a personal Facebook, Google, or Twitter account to use when grading this assignment. 
-Please contact the course staff if you have any questions about this. This is the hardest achievement in Webware; you have been warned!  
-- (5 points) Get 100% (not 98%, not 99%, but 100%) in all four lighthouse tests required for this assignment.
-- (up to 5 points) List up to five Express middleware packages you used and a short (one sentence) summary of what each one does. THESE MUST BE SEPARATE PACKAGES THAT YOU INSTALL VIA NPM, NOT THE ONES INCLUDED WITH EXPRESS. So express.json and express.static don't count here. For a starting point on middleware, see [this list](https://expressjs.com/en/resources/middleware.html).
-
-*Design/UX*
-- (10 points) Make your site accessible using the [resources and hints available from the W3C](https://www.w3.org/WAI/), Implement/follow twelve tips from their [tips for writing](https://www.w3.org/WAI/tips/writing/), [tips for designing](https://www.w3.org/WAI/tips/designing/), and [tips for development](https://www.w3.org/WAI/tips/developing/). *Note that all twelve must require active work on your part*. 
-For example, even though your page will most likely not have a captcha, you don't get this as one of your twelve tips to follow because you're effectively 
-getting it "for free" without having to actively change anything about your site. 
-Contact the course staff if you have any questions about what qualifies and doesn't qualify in this regard. 
-List each tip that you followed and describe what you did to follow it in your site.
-- (5 points) Describe how your site uses the CRAP principles in the Non-Designer's Design Book readings. 
-Which element received the most emphasis (contrast) on each page? 
-How did you use proximity to organize the visual information on your page? 
-What design elements (colors, fonts, layouts, etc.) did you use repeatedly throughout your site? 
-How did you use alignment to organize information and/or increase contrast for particular elements. 
-Write a paragraph of at least 125 words *for each of the four principles* (four paragraphs, 500 words in total).
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-A link to your project running on render.
+[My website](https://a3-justin-fletcher.onrender.com/)
 
 Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
 
@@ -104,8 +12,46 @@ Include a very brief summary of your project here. Images are encouraged, along 
 - what CSS framework you used and why
   - include any modifications to the CSS framework you made via custom CSS you authored
 
+The goal of my application was to allow users to save information about baseball prospects they are doing research on. Users can view their saved players on their account and use the form to enter more players' information. 
+
+I faced many challenges in making this application and spent quite a long time on it. One difficulty I faced was with the redirect functionality. I was able to redirect from the server when the request came in from a form tag, but I was unable to redirect from the server when the request came from a fetch call in my script. My solution to this problem was doing client side redirects using window.location.href to the desired URL. My server told my client to redirect by sending a specific status code of 302. 
+
+I chose a simple authentication strategy of saving my usernames and passwords as plain JSON in my MongoDB database. I made a collection for users separate from my collection of data and tied each data instance in the data collection to a user id. The user id came from MongoDB's automatic assignment of an ID to every new object created. While not very secure, I chose this strategy because it was attainable. Having said that, I think I did a good job since the system does handle incorrect passwords for existing users and non-existing users. The only flaw in the system is if the user types in a non-existent username they get redirected to a create account page at which point they could type in an existing username and there would now be duplicate users in the database. A future improvement could be checking for that obscure edge case and displaying a message along the lines of user already exists. 
+
+My currently created user account are:
+username: admin 
+password: admin
+
+username: user1
+password: password123
+
+Both accounts have different data saved with them. If you create a new account it will have no data associated with it.
+
+I used materialize as my CSS framework because I wanted to go with a material design framework and it was the first one I found. I still had to write some CSS and left some of my CSS in from last assignment. I think it might have been better to use a framework like Tailwind which seems to be more powerful. For example, I was having some issues with padding and I had to add CSS rules in my stylesheet to fix it as opposed to setting a custom class name like I believe you can do in tailwind. I also had to add some !important CSS rules to override my framework at times when I didn't like some of the styling choices it made, specifically with font sizes.    
+
 ## Technical Achievements
-- **Tech Achievement 1**: I used OAuth authentication via the GitHub strategy
+- **100% Lighthouse Scores**: I got 100% in Google Lighthouse's 4 tests on Desktop of Performance, Accessibility, Best Practices, SEO. Below is an image proving that I accomplished this. 
+Some steps I took to accomplish this were:
+  - Remove my usage of a CDN for my CSS framework and instead serve relevant files from node_modules via my server to increase performance
+  - Increase accessibility score by adding some semantic tags, making sure all form inputs have a label, and abiding by contrast guidelines
+  - Add meta description tags to improve SEO
+  - Note, I sometimes had issues where I got no score for SEO due to issues with the robots.txt file. However, this was only an issue when doing lighthouse in Chrome and eventually resolved itself (as you can see by the image below) If you have this issue, try running the lighthouse test on the web using the website PageSpeed. 
+
+![Google Lighthouse Proof](LighthouseProof.png)
+
+- **Extra Express Middleware Packages**: I used the following extra middleware packages:
+  - cors adds extra headers to responses to allow cross-origin requests.
+  - morgan adds logging for every incoming request to the server and outgoing response to the client.
+  - serve-favicon does what you would expect and serves a favicon icon but it caches it which improves performance
+  - compression again is self explanatory in that it compresses responses over 1 kilobyte
+  - response-time which records the request response time in milliseconds in a new response header X-Response-Time
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: I followed the following tips from the W3C Web Accessibility Initiative...
+- **W3C Web Accessibility Tips**: I followed the following tips from the W3C Web Accessibility Initiative...
+  - Associate a label with every form control
+  - Include alternative text for images
+  - Identify page language
+  - Use headings and spacing to group related content
+  - Provide sufficient contrast between foreground and background
+  - Provide informative, unique page titles
+  - I believe all of the above required active work on my part. I understand it is not 12 items, but I am still hoping to get partial credit. 
