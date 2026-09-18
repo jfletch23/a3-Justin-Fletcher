@@ -2,6 +2,11 @@ require("dotenv").config()
 
 const express = require('express')
 const cookie = require('cookie-session')
+const cors = require('cors')
+const morgan = require('morgan')
+const favicon = require('serve-favicon')
+const path = require('path')
+const compression = require('compression')
 const app = express()
 
 const {MongoClient, ObjectId} = require("mongodb")
@@ -10,8 +15,12 @@ let players_collection
 let users_collection
 
 app.use(express.static('public'))
+app.use(compression())
+app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(cors())
+app.use(favicon(path.join(__dirname, "public", "favicon.ico")))
 
 const materialize_css_middleware = (req, res) => {
   const file_path = __dirname + "/node_modules/materialize-css/dist/css/materialize.min.css"
