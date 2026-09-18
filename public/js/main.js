@@ -23,6 +23,7 @@ const submit = async function( event ) {
   playersRequest()
 
   form.reset()
+  M.updateTextFields()
 }
 
 const logout = async function(event) {
