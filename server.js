@@ -7,6 +7,7 @@ const morgan = require('morgan')
 const favicon = require('serve-favicon')
 const path = require('path')
 const compression = require('compression')
+const responseTime = require('response-time')
 const app = express()
 
 const {MongoClient, ObjectId} = require("mongodb")
@@ -20,6 +21,7 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors())
+app.use(responseTime())
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")))
 
 const materialize_css_middleware = (req, res) => {
