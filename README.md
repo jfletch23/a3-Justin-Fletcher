@@ -25,7 +25,7 @@ Some steps I took to accomplish this were:
   - Remove my usage of a CDN for my CSS framework and instead serve relevant files from node_modules via my server to increase performance
   - Increase accessibility score by adding some semantic tags, making sure all form inputs have a label, and abiding by contrast guidelines
   - Add meta description tags to improve SEO
-  - Note, I sometimes had issues where I got no score for SEO due to issues with the robots.txt file. However, this was only an issue when doing lighthouse in Chrome and eventually resolved itself (as you can see by the image below) If you have this issue, try running the lighthouse test on the web using the website PageSpeed. 
+  - Note, I sometimes had issues where I got no score for SEO due to issues with the robots.txt file. However, this was only an issue when doing lighthouse in Chrome and eventually resolved itself (as you can see by the image below) If you have this issue, try running the lighthouse test on the web using the website PageSpeed (click [this link](https://pagespeed.web.dev/analysis/https-a3-justin-fletcher-onrender-com/6itefq6tvm?form_factor=desktop) to see my test on PageSpeed) 
 
 ![Google Lighthouse Proof](LighthouseProof.png)
 
