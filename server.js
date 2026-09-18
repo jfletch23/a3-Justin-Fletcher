@@ -13,6 +13,33 @@ app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+const materialize_css_middleware = (req, res) => {
+  const file_path = __dirname + "/node_modules/materialize-css/dist/css/materialize.min.css"
+  res.sendFile(file_path)
+}
+
+app.get("/materialize.min.css", materialize_css_middleware)
+
+const material_icons_middleware = (req, res) => {
+  const file_path = __dirname + "/node_modules/material-icons/iconfont/material-icons.css"
+  res.sendFile(file_path)
+}
+
+app.get("/material-icons.css", material_icons_middleware)
+
+const material_icons_font_file_one_middleware = (req, res) => {
+  const file_path = __dirname + "/node_modules/material-icons/iconfont/material-icons.woff"
+  res.sendFile(file_path)
+}
+
+const material_icons_font_file_two_middleware = (req, res) => {
+  const file_path = __dirname + "/node_modules/material-icons/iconfont/material-icons.woff2"
+  res.sendFile(file_path)
+}
+
+app.get("/material-icons.woff", material_icons_font_file_one_middleware)
+app.get("/material-icons.woff2", material_icons_font_file_two_middleware)
+
 const check_connection_middleware = (req, res, next) => {
   if (players_collection !== undefined && users_collection !== undefined) {
     next()
