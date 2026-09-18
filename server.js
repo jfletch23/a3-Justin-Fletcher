@@ -20,6 +20,13 @@ const materialize_css_middleware = (req, res) => {
 
 app.get("/materialize.min.css", materialize_css_middleware)
 
+const materialize_js_middleware = (req, res) => {
+  const file_path = __dirname + "/node_modules/materialize-css/dist/js/materialize.min.js"
+  res.sendFile(file_path)
+}
+
+app.get("/materialize.min.js", materialize_js_middleware)
+
 const material_icons_middleware = (req, res) => {
   const file_path = __dirname + "/node_modules/material-icons/iconfont/material-icons.css"
   res.sendFile(file_path)

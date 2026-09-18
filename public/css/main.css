@@ -33,7 +33,7 @@ header {
 }
 #main_form {
   border-style: solid;
-  border-color: lightgreen;
+  border-color: darkgreen;
   padding: 5px;
   margin: 10px;
 }
@@ -49,6 +49,10 @@ h2 {
 }
 .input-field > label.active {
   font-size: 1.7rem !important;
+  color: black !important;
+}
+.select-wrapper label {
+  font-size: 1.2rem !important;
   color: black !important;
 }
 input {
@@ -82,7 +86,7 @@ input[type="number"] {
 }
 .panel {
   border-style: solid;
-  border-color: lightgreen;
+  border-color: darkgreen;
   margin: 10px;
   padding: 5px;
 }

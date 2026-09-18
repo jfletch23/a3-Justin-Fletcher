@@ -65,9 +65,9 @@ window.onload = async function() {
     window.location.href = "/"
   }
   const username_json = await username.json()
-  console.log(username_json)
   display_username.innerText = username_json.username
   display_username.id = "username_text"
+  display_username.className = "black-text"
   const username_parent = document.querySelector("#user_parent")
   username_parent.insertBefore(display_username, username_parent.children[0])
   const dropdown_menu = document.querySelector(".dropdown-trigger")
@@ -77,6 +77,13 @@ window.onload = async function() {
   })
   const select = document.querySelectorAll("select")
   const instances_two = M.FormSelect.init(select, {dropdownOptions: {coverTrigger: false}})
+  const select_wrapper = form.querySelector(".select-wrapper")
+  const select_input = select_wrapper.querySelector("input")
+  select_input.id = "custom_position_select"
+  const select_label = document.createElement("label")
+  select_label.htmlFor = "custom_position_select"
+  select_label.innerText = "Select Position"
+  select_wrapper.insertBefore(select_label, select_wrapper.children[0])
   playersRequest()
 }
 
@@ -124,7 +131,7 @@ const display_data = function(data) {
     ul.appendChild(li_overall)
     delete_button = document.createElement("button")
     delete_button.innerText = "Delete Player"
-    delete_button.className = "btn waves-effect waves-light"
+    delete_button.className = "btn waves-effect waves-light blue-text text-darken-4 teal accent-3"
     const trash_icon = document.createElement("i")
     trash_icon.innerText = "delete"
     trash_icon.className = "material-icons left"
@@ -136,7 +143,7 @@ const display_data = function(data) {
     
     update_button = document.createElement("button")
     update_button.innerText = "Update Player"
-    update_button.className = "btn waves-effect waves-light"
+    update_button.className = "btn waves-effect waves-light blue-text text-darken-4 teal accent-3"
     const update_icon = document.createElement("i")
     update_icon.innerText = "update"
     update_icon.className = "material-icons left"

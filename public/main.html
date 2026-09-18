@@ -4,10 +4,10 @@
     <title>Baseball Prospects Ranking</title>
     <meta charset='utf-8' >
     <meta name="description" content="Baseball Prospects Database Main Page">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/materialize.min.js"></script>
     <script src='js/main.js'></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/material-icons.css">
+    <link rel="stylesheet" href="/materialize.min.css">
     <link rel='stylesheet' href='css/main.css' >
     <!-- get rid of favicon error -->
     <link rel='icon' href='data:;base64,iVBORw0KGgo=' >
@@ -17,12 +17,12 @@
       <div class="nav-wrapper teal accent-3">
           <a href="/" class="brand-logo left flex-logo">
               <img src="baseball.png" alt="baseball logo">
-              <span class="yellow-text lighten-3">Baseball Prospects Database</span>
+              <span class="blue-text text-darken-4">Baseball Prospects Database</span>
           </a>
           <div class="right">
             <div class="valign-wrapper" id="user_parent">
               <a class="dropdown-trigger" href="#" data-target="icon-dropdown">
-                <i class="material-icons">account_circle</i>
+                <i class="material-icons black-text">account_circle</i>
               </a>
             </div>
           </div>
@@ -36,90 +36,92 @@
         </button>
       </li>
     </ul>
-    <header>
-    <h1 class="header center red-text">Your Scouted Players</h1>
-    </header>
-    <div class="my-container">
-    <form id="main_form">
-      <h2>Fill Out Scouting Report</h2>
-      <div class="input-field">
-        <input type="text" id="player_name" name="player_name" value="" required>
-        <label for="player_name" class="active">Enter name</label>
+    <main>
+      <header>
+        <h1 class="header center">Your Scouted Players</h1>
+      </header>
+      <div class="my-container">
+      <form id="main_form">
+        <h2>Fill Out Scouting Report</h2>
+        <div class="input-field">
+          <input type="text" id="player_name" name="player_name" value="" required>
+          <label for="player_name" class="active">Enter name</label>
+        </div>
+        <div class="input-field">
+          <input type="date" id="player_birthday" name="player_birthday" required>
+          <label for="player_birthday">Enter birthday</label>
+        </div>
+        <div class="input-field">
+          <select name="player_position" id="player_position" required>
+            <option value="">Choose a position</option>
+            <option value="Pitcher">Pitcher</option>
+            <option value="Catcher">Catcher</option>
+            <option value="First Base">First Base</option>
+            <option value="Second Base">Second Base</option>
+            <option value="Third Base">Third Base</option>
+            <option value="Shortstop">Shortstop</option>
+            <option value="Left Field">Left Field</option>
+            <option value="Center Field">Center Field</option>
+            <option value="Right Field">Right Field</option>
+          </select>
+          <label class="hide" for="player_position">Select position</label>
+        </div>
+        <fieldset>
+          <legend>Enter batting handedness</legend>
+          <label class="display-block" for="batting_right">
+            <input type="radio" id="batting_right" name="batting" value="Right" class="with-gap" required>
+            <span>Right</span>
+          </label>
+          <label class="display-block" for="batting_left">
+            <input type="radio" id="batting_left" name="batting" value="Left" class="with-gap" required>
+            <span>Left</span>
+          </label>
+          <label class="display-block" for="batting_switch">
+            <input type="radio" id="batting_switch" name="batting" value="Switch" class="with-gap" required>
+            <span>Switch</span>
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Enter throwing handedness</legend>
+          <label class="display-block" for="throwing_right">
+            <input type="radio" id="throwing_right" name="throwing" value="Right" class="with-gap" required>
+            <span>Right</span>
+          </label>
+          <label class="display-block" for="throwing_left">
+            <input type="radio" id="throwing_left" name="throwing" value="Left" class="with-gap" required>
+            <span>Left</span>
+          </label>
+          <label class="display-block" for="throwing_switch">
+            <input type="radio" id="throwing_switch" name="throwing" value="Switch" class="with-gap" required>
+            <span>Switch</span>
+          </label>
+        </fieldset>
+        <div class="input-field">
+          <input type="number" id="hit_tool" name="hit_tool" min="20" max="80" step="5" value="50" required>
+          <label for="hit_tool" class="active">Enter hit tool rating</label>
+        </div>
+        <div class="input-field">
+          <input type="number" id="power_tool" name="power_tool" min="20" max="80" step="5" value="50" required>
+          <label for="power_tool">Enter power tool rating</label>
+        </div>
+        <div class="input-field">
+          <input type="number" id="run_tool" name="run_tool" min="20" max="80" step="5" value="50" required>
+          <label for="run_tool">Enter run tool rating</label>
+        </div>
+        <div class="input-field">
+          <input type="number" id="arm_tool" name="arm_tool" min="20" max="80" step="5" value="50" required>
+          <label for="arm_tool">Enter arm tool rating</label>
+        </div>
+        <div class="input-field">
+          <input type="number" id="field_tool" name="field_tool" min="20" max="80" step="5" value="50" required>
+          <label for="field_tool">Enter field tool rating</label>
+        </div>
+        <button class="btn waves-effect waves-light blue-text text-darken-4 teal accent-3" type="submit" id="submit">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
+      <div class="wrapper"></div>       
       </div>
-      <div class="input-field">
-        <input type="date" id="player_birthday" name="player_birthday" required>
-        <label for="player_birthday">Enter birthday</label>
-      </div>
-      <div class="input-field">
-        <select name="player_position" id="player_position" required>
-          <option value="">Choose a position</option>
-          <option value="Pitcher">Pitcher</option>
-          <option value="Catcher">Catcher</option>
-          <option value="First Base">First Base</option>
-          <option value="Second Base">Second Base</option>
-          <option value="Third Base">Third Base</option>
-          <option value="Shortstop">Shortstop</option>
-          <option value="Left Field">Left Field</option>
-          <option value="Center Field">Center Field</option>
-          <option value="Right Field">Right Field</option>
-        </select>
-        <label>Select position</label>
-      </div>
-      <fieldset>
-        <legend>Enter batting handedness</legend>
-        <label class="display-block" for="batting_right">
-          <input type="radio" id="batting_right" name="batting" value="Right" class="with-gap" required>
-          <span>Right</span>
-        </label>
-        <label class="display-block" for="batting_left">
-          <input type="radio" id="batting_left" name="batting" value="Left" class="with-gap" required>
-          <span>Left</span>
-        </label>
-        <label class="display-block" for="batting_switch">
-          <input type="radio" id="batting_switch" name="batting" value="Switch" class="with-gap" required>
-          <span>Switch</span>
-        </label>
-      </fieldset>
-      <fieldset>
-        <legend>Enter throwing handedness</legend>
-        <label class="display-block" for="throwing_right">
-          <input type="radio" id="throwing_right" name="throwing" value="Right" class="with-gap" required>
-          <span>Right</span>
-        </label>
-        <label class="display-block" for="throwing_left">
-          <input type="radio" id="throwing_left" name="throwing" value="Left" class="with-gap" required>
-          <span>Left</span>
-        </label>
-        <label class="display-block" for="throwing_switch">
-          <input type="radio" id="throwing_switch" name="throwing" value="Switch" class="with-gap" required>
-          <span>Switch</span>
-        </label>
-      </fieldset>
-      <div class="input-field">
-        <input type="number" id="hit_tool" name="hit_tool" min="20" max="80" step="5" value="50" required>
-        <label for="hit_tool" class="active">Enter hit tool rating</label>
-      </div>
-      <div class="input-field">
-        <input type="number" id="power_tool" name="power_tool" min="20" max="80" step="5" value="50" required>
-        <label for="power_tool">Enter power tool rating</label>
-      </div>
-      <div class="input-field">
-        <input type="number" id="run_tool" name="run_tool" min="20" max="80" step="5" value="50" required>
-        <label for="run_tool">Enter run tool rating</label>
-      </div>
-      <div class="input-field">
-        <input type="number" id="arm_tool" name="arm_tool" min="20" max="80" step="5" value="50" required>
-        <label for="arm_tool">Enter arm tool rating</label>
-      </div>
-      <div class="input-field">
-        <input type="number" id="field_tool" name="field_tool" min="20" max="80" step="5" value="50" required>
-        <label for="field_tool">Enter field tool rating</label>
-      </div>
-      <button class="btn waves-effect waves-light" type="submit" id="submit">Submit
-        <i class="material-icons right">send</i>
-      </button>
-    </form>
-    <div class="wrapper"></div>       
-    </div>
+    </main>
   </body>
 </html>
