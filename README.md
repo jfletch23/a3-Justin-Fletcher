@@ -1,16 +1,8 @@
 Assignment 3 - Persistence: Two-tier Web Application with Database, Express server, and CSS template
 ===
-## Baseball Prospects Database
+# Baseball Prospects Database
 
 [My website](https://a3-justin-fletcher.onrender.com/)
-
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
-
-- the goal of the application
-- challenges you faced in realizing the application
-- what authentication strategy you chose to use and why (choosing one because it seemed the easiest to implement is perfectly acceptable)
-- what CSS framework you used and why
-  - include any modifications to the CSS framework you made via custom CSS you authored
 
 The goal of my application was to allow users to save information about baseball prospects they are doing research on. Users can view their saved players on their account and use the form to enter more players' information. 
 
@@ -47,7 +39,7 @@ Some steps I took to accomplish this were:
   - response-time which records the request response time in milliseconds in a new response header X-Response-Time
 
 ### Design/Evaluation Achievements
-- **W3C Web Accessibility Tips**: I followed the following tips from the W3C Web Accessibility Initiative...
+- **W3C Web Accessibility Tips**: I followed the following tips from the W3C Web Accessibility Initiative:
   - Associate a label with every form control
   - Include alternative text for images
   - Identify page language
